@@ -21,7 +21,7 @@ CREATE TABLE Proveedores (
 CREATE TABLE Productos (
   id_producto INT PRIMARY KEY auto_increment,
   nombre VARCHAR(50),
-  categoria VARCHAR(20),
+  categoria VARCHAR(30),
   precio varchar(10),
   color VARCHAR(20),
   proveedor varchar(50),
@@ -118,13 +118,13 @@ LIMIT 1;
 
 SELECT p.id_proveedor, p.nombre_corporativo, SUM(pr.stock) AS total_stock
 FROM proveedores p
-JOIN productos pr ON p.id_proveedor = pr.proveedor
+JOIN productos pr ON p.nombre_corporativo = pr.proveedor
 GROUP BY p.id_proveedor, p.nombre_corporativo
 ORDER BY total_stock ASC
-LIMIT 1;
+LIMIT 3;
 
 -- Cambien la categoría de productos más popular por ‘Electrónica y computación’.
-UPDATE producto
+UPDATE productos
 SET categoria = 'Electrónica y computación'
 WHERE categoria = (
     SELECT categoria
